@@ -5,10 +5,10 @@ function ipcInit() {
     socket.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
       ipc.onEvents.get(data.event)?.forEach((callback) => {
-        callback(data.payload);
+        callback(data.payload, data.event);
       });
       ipc.onceEvents.get(data.event)?.forEach((callback) => {
-        callback(data.payload);
+        callback(data.payload, data.event);
         ipc.onceEvents.delete(data.event);
       });
     });

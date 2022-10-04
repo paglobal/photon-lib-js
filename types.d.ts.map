@@ -1,1 +1,1 @@
-{"mappings":"AAsEA,mBAAmB","sources":["src/src/ipc.ts","src/src/photon-lib-js.ts","src/photon-lib-js.ts"],"sourcesContent":[null,null,"import ipc from \"./ipc\";\n\nexport { ipc };\n"],"names":[],"version":3,"file":"types.d.ts.map"}
+{"mappings":"AAsEA,mBAAmB","sources":["src/src/ipc.ts","src/src/photon-lib-js.ts","src/photon-lib-js.ts"],"sourcesContent":[null,null,"import ipc from \"./ipc\";\n\nexport { ipc };\n"],"names":[],"version":3,"file":"types.d.ts.map","sourceRoot":"/"}
