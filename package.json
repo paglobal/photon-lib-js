@@ -1,6 +1,6 @@
 {
   "name": "photon-lib-js",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "JavaScript library that powers JavaScript frontend of Photon",
   "source": "src/photon-lib-js.ts",
   "main": "photon-lib-js.js",

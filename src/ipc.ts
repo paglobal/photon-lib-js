@@ -1,14 +1,14 @@
-function ipcInit() {
-  const socket = new WebSocket("ws://127.0.0.1:53174/ipc");
+function ipcInit(port) {
+  const socket = new WebSocket(`ws://127.0.0.1:${port}/ipc`);
 
   socket.addEventListener("open", () => {
     socket.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
       ipc.onEvents.get(data.event)?.forEach((callback) => {
-        callback(data.payload);
+        callback(data.payload, data.event);
       });
       ipc.onceEvents.get(data.event)?.forEach((callback) => {
-        callback(data.payload);
+        callback(data.payload, data.event);
         ipc.onceEvents.delete(data.event);
       });
     });
@@ -19,7 +19,7 @@ function ipcInit() {
       "IPC connection terminated. Attempting to re-establish connection..."
     );
     setTimeout(() => {
-      const ipc = ipcInit();
+      const ipc = ipcInit(port);
       ipc.on("open", () => location.reload());
     }, 1000);
   });
@@ -66,6 +66,4 @@ function ipcInit() {
   return ipc;
 }
 
-const ipc = ipcInit();
-
-export default ipc;
+export default ipcInit;
