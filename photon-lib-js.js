@@ -1,5 +1,5 @@
-function $cc0bb50ce9d97eb2$var$ipcInit() {
-    const socket = new WebSocket("ws://127.0.0.1:53174/ipc");
+function $cc0bb50ce9d97eb2$var$ipcInit(port) {
+    const socket = new WebSocket(`ws://127.0.0.1:${port}/ipc`);
     socket.addEventListener("open", ()=>{
         socket.addEventListener("message", (e)=>{
             const data = JSON.parse(e.data);
@@ -15,7 +15,7 @@ function $cc0bb50ce9d97eb2$var$ipcInit() {
     socket.addEventListener("close", ()=>{
         console.error("IPC connection terminated. Attempting to re-establish connection...");
         setTimeout(()=>{
-            const ipc = $cc0bb50ce9d97eb2$var$ipcInit();
+            const ipc = $cc0bb50ce9d97eb2$var$ipcInit(port);
             ipc.on("open", ()=>location.reload());
         }, 1000);
     });
@@ -55,11 +55,10 @@ function $cc0bb50ce9d97eb2$var$ipcInit() {
     };
     return ipc;
 }
-const $cc0bb50ce9d97eb2$var$ipc = $cc0bb50ce9d97eb2$var$ipcInit();
-var $cc0bb50ce9d97eb2$export$2e2bcd8739ae039 = $cc0bb50ce9d97eb2$var$ipc;
+var $cc0bb50ce9d97eb2$export$2e2bcd8739ae039 = $cc0bb50ce9d97eb2$var$ipcInit;
 
 
 
 
-export {$cc0bb50ce9d97eb2$export$2e2bcd8739ae039 as ipc};
+export {$cc0bb50ce9d97eb2$export$2e2bcd8739ae039 as ipcInit};
 //# sourceMappingURL=photon-lib-js.js.map

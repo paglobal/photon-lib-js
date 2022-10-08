@@ -1,3 +1,3 @@
-import ipc from "./ipc";
+import ipcInit from "./ipc";
 
-export { ipc };
+export { ipcInit };
