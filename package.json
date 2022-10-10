@@ -1,9 +1,10 @@
 {
   "name": "photon-lib-js",
-  "version": "0.0.5",
+  "version": "0.0.9",
   "description": "JavaScript library that powers JavaScript frontend of Photon",
   "source": "src/photon-lib-js.ts",
   "main": "photon-lib-js.js",
+  "types": "types.d.ts",
   "type": "module",
   "scripts": {
     "watch": "parcel watch",
