@@ -1,3 +1,3 @@
-export default ipcInit;
+export { ipcInit };
 
 //# sourceMappingURL=types.d.ts.map
