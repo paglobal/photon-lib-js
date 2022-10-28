@@ -1,4 +1,6 @@
-function ipcInit(port) {
+type Callback = (payload?: any, event?: string) => void;
+
+function ipcInit(port: string) {
   const socket = new WebSocket(`ws://127.0.0.1:${port}/ipc`);
 
   socket.addEventListener("open", () => {
@@ -25,7 +27,7 @@ function ipcInit(port) {
   });
 
   const ipc = {
-    on: (event, callback) => {
+    on: (event: string, callback: Callback) => {
       switch (event) {
         case "open":
         case "close":
@@ -35,10 +37,10 @@ function ipcInit(port) {
           return ipc.registerEvent(event, callback, "on");
       }
     },
-    once: (event, callback) => {
+    once: (event: string, callback: Callback) => {
       return ipc.registerEvent(event, callback, "once");
     },
-    registerEvent: (event, callback, type) => {
+    registerEvent: (event: string, callback: Callback, type: "on" | "once") => {
       const eventsMap = ipc[`${type}Events`];
       if (!eventsMap.has(event)) {
         eventsMap.set(event, []);
@@ -56,11 +58,11 @@ function ipcInit(port) {
         if (eventArray.length === 0) eventsMap.delete(event);
       };
     },
-    emit: (event, payload) => {
+    emit: (event: string, payload?: any) => {
       socket.send(JSON.stringify({ event, payload }));
     },
-    onEvents: new Map(),
-    onceEvents: new Map(),
+    onEvents: new Map() as Map<string, Array<Callback>>,
+    onceEvents: new Map() as Map<string, Array<Callback>>,
   };
 
   return ipc;
